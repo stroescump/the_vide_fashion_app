@@ -84,7 +84,7 @@ class _TopMenuState extends State<TopMenu> {
                           });
                           FocusScope.of(context).requestFocus(FocusNode());
                         },
-                        autofocus: true,
+//                        autofocus: true,
                         textAlign: TextAlign.left,
                         decoration: new InputDecoration(
                             border: InputBorder.none,

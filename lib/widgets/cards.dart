@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:the_vide/models/Product.dart';
+import 'package:the_vide/widgets/product_details_screen.dart';
 
 class ProductCard extends StatefulWidget {
-  final String imgUrl;
+  final Product product;
 
-  ProductCard({Key key, this.imgUrl}) : super();
+  ProductCard({Key key, this.product}) : super();
 
   @override
-  _ProductCardState createState() => _ProductCardState(imgUrl);
+  _ProductCardState createState() => _ProductCardState(product);
 }
 
 class _ProductCardState extends State<ProductCard> {
-  _ProductCardState(imgUrl);
+  _ProductCardState(product);
   bool isHeartPressed = false;
   @override
   Widget build(BuildContext context) {
@@ -54,9 +56,16 @@ class _ProductCardState extends State<ProductCard> {
                   right: 0,
                   left: 0,
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductDetails(widget.product),
+                        ),
+                      );
+                    },
                     child: Image.asset(
-                      (widget.imgUrl),
+                      (widget.product.imgUrl[0]),
                       width: 300,
                       height: 300,
                     ),

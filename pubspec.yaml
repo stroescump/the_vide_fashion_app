@@ -14,7 +14,7 @@ description: THE APP.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
   font_awesome_flutter: ^8.8.1
@@ -50,6 +50,8 @@ flutter:
     - assets/images/FRONT_TEE1.png
     - assets/images/FRONT_TEE2.png
     - assets/images/FRONT_TEE3.png
+    - assets/images/FRONT_TEE_DETAILS.png
+    - assets/images/BACK_TEE_DETAILS.png
     - assets/images/textureBG.png
   #  - images/a_dot_ham.jpeg
 

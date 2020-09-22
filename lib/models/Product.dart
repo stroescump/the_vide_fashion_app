@@ -5,12 +5,13 @@ class Product {
   String description;
   String availableColors;
   String availableSizes;
-  String imgUrl;
+  List<String> imgUrl;
 
-  Product(name, price, description, imgUrl) {
+  Product(name, price, description, imgUrl, currency) {
     this.name = name;
     this.price = price;
     this.description = description;
     this.imgUrl = imgUrl;
+    this.currency = currency;
   }
 }

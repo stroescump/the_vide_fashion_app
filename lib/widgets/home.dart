@@ -11,13 +11,26 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<Product> productsAvailable = [
-    new Product("Tee1", 124.99, "Description1", "assets/images/FRONT_TEE.png"),
-    new Product("Tee2", 130.99, "Description2", "assets/images/FRONT_TEE1.png"),
-    new Product("Tee3", 150.99, "Description3", "assets/images/FRONT_TEE2.png"),
-    new Product("Tee4", 190.00, "Description4", "assets/images/FRONT_TEE3.png"),
+    new Product(
+        "Imperfect is fine.",
+        124.99,
+        "100% organic cotton, finest quality." +
+            "Printed with water-based inks to allow the material to breathe" +
+            "and for increased washability.",
+        [
+          "assets/images/FRONT_TEE.png",
+          "assets/images/FRONT_TEE_DETAILS.png",
+          "assets/images/BACK_TEE_DETAILS.png",
+        ],
+        "RON"),
+//    new Product("Tee2", 130.99, "Description2", "assets/images/FRONT_TEE1.png"),
+//    new Product("Tee3", 150.99, "Description3", "assets/images/FRONT_TEE2.png"),
+//    new Product("Tee4", 190.00, "Description4", "assets/images/FRONT_TEE3.png"),
   ];
+
   @override
   Widget build(BuildContext context) {
+    print(productsAvailable[0].imgUrl[0]);
     return Scaffold(
         body: Column(
       children: <Widget>[
