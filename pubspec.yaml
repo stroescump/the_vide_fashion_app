@@ -14,12 +14,13 @@ description: THE APP.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.2.0 <3.0.0"
+  sdk: ">=2.3.0 <3.0.0"
 
 dependencies:
   font_awesome_flutter: ^8.8.1
   flutter:
     sdk: flutter
+  provider: ^3.0.0
 
 
   # The following adds the Cupertino Icons font to your application.

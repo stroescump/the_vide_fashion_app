@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_vide/widgets/CartWidget.dart';
 
 class TopMenu extends StatefulWidget {
   @override
@@ -40,7 +41,10 @@ class _TopMenuState extends State<TopMenu> {
                 ),
                 Spacer(),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => CartWidget()));
+                  },
                   icon: Icon(Icons.shopping_cart),
                   color: Colors.pink[800],
                 )

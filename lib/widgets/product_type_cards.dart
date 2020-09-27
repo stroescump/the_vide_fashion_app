@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_vide/models/Product.dart';
-import 'package:the_vide/widgets/cards.dart';
+import 'package:the_vide/widgets/ProductCard.dart';
 
 class ProductTypeCards extends StatelessWidget {
   final List<Product> productsAvailable;

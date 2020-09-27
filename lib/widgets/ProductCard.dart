@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:the_vide/models/ClothingSizeNotifier.dart';
 import 'package:the_vide/models/Product.dart';
-import 'package:the_vide/widgets/product_details_screen.dart';
+
+import 'ProductDetails.dart';
 
 class ProductCard extends StatefulWidget {
   final Product product;
@@ -14,7 +17,9 @@ class ProductCard extends StatefulWidget {
 
 class _ProductCardState extends State<ProductCard> {
   _ProductCardState(product);
+
   bool isHeartPressed = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -60,7 +65,9 @@ class _ProductCardState extends State<ProductCard> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ProductDetails(widget.product),
+                          builder: (context) => ChangeNotifierProvider(
+                              create: (context) => ClothingSizeNotifier(),
+                              child: ProductDetails(widget.product)),
                         ),
                       );
                     },
