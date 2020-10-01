@@ -18,4 +18,9 @@ class CartNotifier extends ChangeNotifier {
     _productsInCart.add(productToBeAdded);
     notifyListeners();
   }
+
+  void removeItem(ProductCart productToBeRemoved) {
+    _productsInCart.remove(productToBeRemoved);
+    notifyListeners();
+  }
 }

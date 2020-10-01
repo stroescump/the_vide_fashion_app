@@ -52,7 +52,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    print(productsAvailable[0].imgUrl[0]);
     return Scaffold(
         body: Column(
       children: <Widget>[

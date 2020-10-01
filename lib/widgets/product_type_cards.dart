@@ -33,7 +33,7 @@ class ProductTypeCards extends StatelessWidget {
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               children: productsAvailable
-                  .map((p) => ProductCard(product: p))
+                  .map((p) => ProductCard(Key(""), p, false, null))
                   .toList()),
         ),
       ],

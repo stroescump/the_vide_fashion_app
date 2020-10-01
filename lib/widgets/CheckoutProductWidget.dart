@@ -23,35 +23,33 @@ class CheckoutProduct extends StatelessWidget {
   CheckoutProduct(this._productCart);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 10, bottom: 10, left: 30, right: 50),
-      child: Row(
+    return SafeArea(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(
-            _productCart.product.imgUrl[1],
-            width: 100,
-            height: 100,
+          Text(
+            _productCart.product.name,
+            style: CheckoutProduct.checkoutTextStylePrimary,
           ),
-          Spacer(),
-          Column(
+          Text(
+            "Size: " + _productCart.sizeOfProduct,
+            style: CheckoutProduct.checkoutTextStylePrimary,
+          ),
+          SizedBox(width: 30),
+          Text(
+            "Qty." + _productCart.quantity.toString(),
+            style: CheckoutProduct.checkoutTextStylePrimary,
+          ),
+          Row(
             children: [
-              Text(
-                "No. of items: " + _productCart.quantity.toString(),
-                style: CheckoutProduct.checkoutTextStylePrimary,
-              ),
-              Text(
-                "Size: " + _productCart.sizeOfProduct,
-                style: CheckoutProduct.checkoutTextStylePrimary,
-              ),
               Text(
                 "Price: " +
                     (_productCart.quantity * _productCart.product.price)
                         .toStringAsFixed(2) +
                     " RON",
                 style: CheckoutProduct.checkoutTextStyleSecondary,
-              )
+              ),
             ],
           )
         ],

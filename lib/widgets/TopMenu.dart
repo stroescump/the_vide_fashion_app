@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_vide/widgets/AccountWidget.dart';
 import 'package:the_vide/widgets/CartWidget.dart';
 
 class TopMenu extends StatefulWidget {
@@ -35,7 +36,11 @@ class _TopMenuState extends State<TopMenu> {
             child: Row(
               children: <Widget>[
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => AccountWidget(),
+                    ));
+                  },
                   icon: Icon(Icons.account_circle),
                   color: Colors.pink[800],
                 ),

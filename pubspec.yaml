@@ -21,6 +21,15 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^3.0.0
+  http: ^0.12.2
+  shared_preferences: ^0.5.12
+  google_sign_in: ^4.5.4
+  firebase_core: ^0.5.0
+  cloud_firestore: ^0.14.0
+  firebase_auth: ^0.18.1
+  rxdart: 0.20.0
+  flutter_signin_button:
+    path: ./flutter_signin_button-1.1.0/
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -45,7 +54,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/samples.jpg
+#    - assets/images/*
+    - assets/images/facebook.png
     - assets/images/pineapple.jpg
     - assets/images/FRONT_TEE.png
     - assets/images/FRONT_TEE1.png
@@ -54,6 +64,10 @@ flutter:
     - assets/images/FRONT_TEE_DETAILS.png
     - assets/images/BACK_TEE_DETAILS.png
     - assets/images/textureBG.png
+    - assets/images/thevide_title_artwork.png
+    - assets/images/login_bg_newspaper.png
+    - assets/images/login_bg_newspaper_16_10.png
+    - assets/judete.json
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

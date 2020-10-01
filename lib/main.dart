@@ -1,10 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:the_vide/helpers/SharedPreferences.dart';
 import 'package:the_vide/models/CartNotifier.dart';
 
 import 'widgets/home.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await sharedPrefs.init();
   runApp(
     ChangeNotifierProvider(
       create: (context) => CartNotifier(),

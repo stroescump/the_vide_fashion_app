@@ -1,92 +1,299 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:the_vide/models/ClothingSizeNotifier.dart';
 import 'package:the_vide/models/Product.dart';
+import 'package:the_vide/models/ProductCart.dart';
 import 'package:the_vide/widgets/AddToCartWidget.dart';
 import 'package:the_vide/widgets/ClothingSizeWidget.dart';
 
+import 'CartWidget.dart';
+
 class ProductDetails extends StatefulWidget {
-  final Product product;
+  final Product _product;
+  final ProductCart _productCart;
   static final Color purchaseBarPrimaryColor = Color(0xffC7AEC3);
   static final Color productDetailAccentColor = Color(0xff2B1327);
+  static final Color productSizeAccentColor = Color(0xff2B1327);
+  static final Color productSizeNotPressedBorderColor = Colors.pink[300];
+  static final Color productSizePressedBorderColor = Colors.transparent;
+  static final Color productSizePressedTextColor = Colors.white;
+  static final Color productSizeNotPressedTextColor = Colors.pink[600];
+  static final Color arrowBackColor = Colors.pink[900];
   static const String EMPTY_SIZE_CHOICE = "empty";
-  static const String TOO_MANY_SIZE_CHOICES = "too_many";
 
   Color get purchaseBarColor => purchaseBarPrimaryColor;
 
   Color get productDetailAccent => productDetailAccentColor;
 
-  ProductDetails(this.product);
+  ProductDetails(this._product, this._productCart);
 
   @override
-  _ProductDetailsState createState() => _ProductDetailsState();
+  _ProductDetailsState createState() => _ProductDetailsState(_productCart);
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
-  int numberOfProducts = 1;
+  int _numberOfProducts = 1;
+  bool _isPressedSsize = false;
+  bool _isPressedMsize = false;
+  bool _isPressedLsize = false;
+  bool _isPressedXLsize = false;
 
-  _ProductDetailsState();
-
-  int verifySelectedSingleChoice(List<bool> listBoolean) {
-    int selectedSizesCount = 0;
-    if (listBoolean[0]) selectedSizesCount++;
-    if (listBoolean[1]) selectedSizesCount++;
-    if (listBoolean[2]) selectedSizesCount++;
-    if (listBoolean[3]) selectedSizesCount++;
-
-    return selectedSizesCount;
+  void populateFieldsIfNeeded() {
+    if (widget._productCart != null) {
+      setState(() {
+        _numberOfProducts = widget._productCart.quantity;
+      });
+      switch (widget._productCart.sizeOfProduct) {
+        case "S":
+          setState(() {
+            _isPressedSsize = true;
+          });
+          break;
+        case "M":
+          setState(() {
+            _isPressedMsize = true;
+          });
+          break;
+        case "L":
+          setState(() {
+            _isPressedLsize = true;
+          });
+          break;
+        case "XL":
+          setState(() {
+            _isPressedXLsize = true;
+          });
+      }
+    }
   }
 
-  String getSelectedSize(ClothingSizeNotifier listBoolean) {
-    if (verifySelectedSingleChoice(listBoolean.getIsSelected) == 1) {
-      if (listBoolean.getIsSelected[0]) {
-        for (int i = 0; i < 4; i++) {
-          if (i != 0) {
-            listBoolean.getIsSelected[i] = false;
-          }
-        }
-        return "S";
-      }
+  _ProductDetailsState(_productCart);
 
-      if (listBoolean.getIsSelected[1]) {
-        for (int i = 0; i < 4; i++) {
-          if (i != 1) {
-            listBoolean.getIsSelected[i] = false;
-          }
-        }
-        return "M";
-      }
+  String getSelectedSize() {
+    if (_isPressedSsize) return "S";
 
-      if (listBoolean.getIsSelected[2]) {
-        for (int i = 0; i < 4; i++) {
-          if (i != 2) {
-            listBoolean.getIsSelected[i] = false;
-          }
-        }
-        return "L";
-      }
+    if (_isPressedMsize) return "M";
 
-      if (listBoolean.getIsSelected[3]) {
-        for (int i = 0; i < 4; i++) {
-          if (i != 3) {
-            listBoolean.getIsSelected[i] = false;
-            print(listBoolean.getIsSelected[i].toString());
-          }
-        }
-        return "XL";
-      }
-    } else if (verifySelectedSingleChoice(listBoolean.getIsSelected) == 0) {
-      return ProductDetails.EMPTY_SIZE_CHOICE;
-    } else {
-      return ProductDetails.TOO_MANY_SIZE_CHOICES;
-    }
+    if (_isPressedLsize) return "L";
+
+    if (_isPressedXLsize) return "XL";
+
+    return ProductDetails.EMPTY_SIZE_CHOICE;
   }
 
   bool _isSecondImageShown = false;
 
   bool get getIsSecondImageShown => _isSecondImageShown;
+
+  Widget clothingSizeWidget() {
+    populateFieldsIfNeeded();
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        GestureDetector(
+            onTap: () {
+              setState(() {
+                _isPressedSsize = !_isPressedSsize;
+                _isPressedMsize = false;
+                _isPressedLsize = false;
+                _isPressedXLsize = false;
+              });
+            },
+            child: ClothingSizeWidget("S", _isPressedSsize)),
+        GestureDetector(
+            onTap: () {
+              setState(() {
+                _isPressedMsize = !_isPressedMsize;
+                _isPressedSsize = false;
+                _isPressedLsize = false;
+                _isPressedXLsize = false;
+              });
+            },
+            child: ClothingSizeWidget("M", _isPressedMsize)),
+        GestureDetector(
+            onTap: () {
+              setState(() {
+                _isPressedLsize = !_isPressedLsize;
+                _isPressedSsize = false;
+                _isPressedMsize = false;
+                _isPressedXLsize = false;
+              });
+            },
+            child: ClothingSizeWidget("L", _isPressedLsize)),
+        GestureDetector(
+            onTap: () {
+              setState(() {
+                _isPressedXLsize = !_isPressedXLsize;
+                _isPressedSsize = false;
+                _isPressedMsize = false;
+                _isPressedLsize = false;
+              });
+            },
+            child: ClothingSizeWidget("XL", _isPressedXLsize)),
+      ],
+    );
+  }
+
+  Widget productNameAndPrice() {
+    return Padding(
+      padding: EdgeInsets.only(top: 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            widget._product.name,
+            style: TextStyle(
+                color: Color(0xff55254F),
+                decoration: TextDecoration.none,
+                fontFamily: 'Nunito',
+                fontWeight: FontWeight.w600,
+                fontSize: 30.0),
+          ),
+          Text(
+            widget._product.price.toString() + " " + widget._product.currency,
+            style: TextStyle(
+                color: Color(0xffB17CAA),
+                decoration: TextDecoration.none,
+                fontFamily: 'Nunito',
+                fontWeight: FontWeight.w400,
+                fontSize: 20.0),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget addToCartBottomBar(Size size) {
+    return Container(
+      width: size.width * 0.9,
+//            alignment: Alignment(-0.5,-0.5),
+      height: size.height / 10,
+      decoration: BoxDecoration(
+        border: Border.all(color: widget.purchaseBarColor),
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: () {
+              if (_numberOfProducts > 1)
+                setState(() {
+                  _numberOfProducts--;
+                });
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: widget.purchaseBarColor.withOpacity(.70),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              width: 35,
+              height: 35,
+              alignment: Alignment.center,
+              child: Icon(
+                FontAwesomeIcons.minus,
+                size: 15,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 15, right: 15),
+            child: Text(
+              _numberOfProducts.toString(),
+              style: TextStyle(
+                  decoration: TextDecoration.none,
+                  color: Color(0xff2B1327).withOpacity(0.85),
+                  fontFamily: 'Nunito',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 20),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                _numberOfProducts++;
+              });
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: widget.purchaseBarColor.withOpacity(.70),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              width: 35,
+              height: 35,
+              alignment: Alignment.center,
+              child: Icon(
+                FontAwesomeIcons.plus,
+                size: 15,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 60,
+          ),
+          AddToCartWidget(
+              widget._product, _numberOfProducts, getSelectedSize()),
+        ],
+      ),
+    );
+  }
+
+  Widget goBackArrowWidget() {
+    return Container(
+      margin: EdgeInsets.only(left: 20, top: 45, right: 20),
+      child: Row(
+        children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: RotatedBox(
+              quarterTurns: 3,
+              child: Icon(
+                Icons.arrow_upward,
+                size: 20,
+                color: ProductDetails.arrowBackColor,
+              ),
+            ),
+          ),
+          Spacer(),
+          IconButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CartWidget()));
+            },
+            icon: Icon(
+              Icons.shopping_cart,
+              size: 20,
+            ),
+            color: Colors.pink[900],
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget productWidget(Size size) {
+    return GestureDetector(
+      onHorizontalDragEnd: (e) {
+        print('DRAG ENDED!');
+        setState(() {
+          _isSecondImageShown = !_isSecondImageShown;
+          print(_isSecondImageShown);
+        });
+      },
+      child: Container(
+        margin: EdgeInsets.only(top: 40),
+        width: size.width,
+        height: size.height / 2,
+        child: !_isSecondImageShown
+            ? Image.asset(widget._product.imgUrl[1])
+            : Image.asset(widget._product.imgUrl[2]),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,83 +317,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onHorizontalDragEnd: (e) {
-                    print('DRAG ENDED!');
-                    setState(() {
-                      _isSecondImageShown = !_isSecondImageShown;
-                      print(_isSecondImageShown);
-                    });
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(top: 40),
-                    width: size.width,
-                    height: size.height / 2,
-                    child: !_isSecondImageShown
-                        ? Image.asset(widget.product.imgUrl[1])
-                        : Image.asset(widget.product.imgUrl[2]),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(left: 20, top: 60),
-                    child: RotatedBox(
-                      quarterTurns: 3,
-                      child: Icon(
-                        Icons.arrow_upward,
-                        size: 20,
-                        color: widget.productDetailAccent,
-                      ),
-                    ),
-                  ),
-                ),
+                productWidget(size),
+                goBackArrowWidget(),
               ],
             ),
             DotsForImageIndex(isSecondImageShown: _isSecondImageShown),
-            Padding(
-              padding: EdgeInsets.only(top: 20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    widget.product.name,
-                    style: TextStyle(
-                        color: Color(0xff55254F),
-                        decoration: TextDecoration.none,
-                        fontFamily: 'Nunito',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 30.0),
-                  ),
-                  Text(
-                    widget.product.price.toString() +
-                        " " +
-                        widget.product.currency,
-                    style: TextStyle(
-                        color: Color(0xffB17CAA),
-                        decoration: TextDecoration.none,
-                        fontFamily: 'Nunito',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 20.0),
-                  ),
-                ],
-              ),
-            ),
-            Consumer<ClothingSizeNotifier>(
-              builder: (context, isSelected, child) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ClothingSizeWidget("S", isSelected),
-                    ClothingSizeWidget("M", isSelected),
-                    ClothingSizeWidget("L", isSelected),
-                    ClothingSizeWidget("XL", isSelected),
-                  ],
-                );
-              },
-            ),
+            productNameAndPrice(),
+            clothingSizeWidget(),
             Container(
               height: 30,
               margin: EdgeInsets.only(top: 40),
@@ -213,87 +350,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                 ],
               ),
             ),
-
             //TODO: THIS IS SO TIGANIE, PUSHED THE PURCHASE BAR DOWN USING THIS...
             SizedBox(height: 10),
             //TODO: PURCHASE BAR
-            Container(
-              width: size.width * 0.9,
-//            alignment: Alignment(-0.5,-0.5),
-              height: size.height / 10,
-              decoration: BoxDecoration(
-                border: Border.all(color: widget.purchaseBarColor),
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      if (numberOfProducts > 1)
-                        setState(() {
-                          numberOfProducts--;
-                        });
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: widget.purchaseBarColor.withOpacity(.70),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      width: 35,
-                      height: 35,
-                      alignment: Alignment.center,
-                      child: Icon(
-                        FontAwesomeIcons.minus,
-                        size: 15,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 15, right: 15),
-                    child: Text(
-                      numberOfProducts.toString(),
-                      style: TextStyle(
-                          decoration: TextDecoration.none,
-                          color: Color(0xff2B1327).withOpacity(0.85),
-                          fontFamily: 'Nunito',
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        numberOfProducts++;
-                      });
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: widget.purchaseBarColor.withOpacity(.70),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      width: 35,
-                      height: 35,
-                      alignment: Alignment.center,
-                      child: Icon(
-                        FontAwesomeIcons.plus,
-                        size: 15,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 60,
-                  ),
-                  Consumer<ClothingSizeNotifier>(
-                      builder: (context, listOfBooleans, child) {
-                    return AddToCartWidget(widget.product, numberOfProducts,
-                        getSelectedSize(listOfBooleans));
-                  }),
-                ],
-              ),
-            )
+            addToCartBottomBar(size),
           ],
         ),
       ),

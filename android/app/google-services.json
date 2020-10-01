@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "168191878128",
+    "firebase_url": "https://thevide-app.firebaseio.com",
+    "project_id": "thevide-app",
+    "storage_bucket": "thevide-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:168191878128:android:2155497118b1bf958b7335",
+        "android_client_info": {
+          "package_name": "com.stroescumarius.thevideapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "168191878128-q144l5f4fhojd0g9ns1msjqcmpss54u1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.stroescumarius.thevideapp",
+            "certificate_hash": "01f05ce1806f77e6d0caea53991acbe42eded049"
+          }
+        },
+        {
+          "client_id": "168191878128-u4q9rbr5sp3krc0gl9tuh65b6djmk3rn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSaZjd-Ic68-bCD0IpfQN4ykmvN3rDAks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "168191878128-u4q9rbr5sp3krc0gl9tuh65b6djmk3rn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

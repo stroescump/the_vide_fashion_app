@@ -23,8 +23,7 @@ class AddToCartWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (this.selectedSize != ProductDetails.EMPTY_SIZE_CHOICE &&
-            this.selectedSize != ProductDetails.TOO_MANY_SIZE_CHOICES) {
+        if (this.selectedSize != ProductDetails.EMPTY_SIZE_CHOICE) {
           ProductCart productToBeAddedToCart =
               new ProductCart(selectedProduct, quantity, selectedSize);
           print(productToBeAddedToCart.toString());
